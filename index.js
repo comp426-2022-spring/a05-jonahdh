@@ -33,7 +33,7 @@ if (args.help || args.h) {
     process.exit(0);
 }
 
-const HTTP_PORT = args.port || 5000;
+const HTTP_PORT = args.port || 3000;
 const app = express();
 
 // Start an app server
