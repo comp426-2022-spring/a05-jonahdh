@@ -2,7 +2,7 @@ import express from 'express';
 import minimist from 'minimist';
 import morgan from 'morgan';
 import fs from 'fs';
-import { coinFlip, coinFlips, countFlips, flipACoin } from './modules/coin.mjs';
+import { coinFlip, coinFlips, countFlips, flipACoin } from './services/coin.mjs';
 import db from './services/database.js';
 
 const args = minimist(process.argv.slice(2));
