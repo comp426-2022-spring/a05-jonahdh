@@ -20,6 +20,7 @@ const Buttons = {
   function navButton(div) {
     clearCurrentDiv();
     showDiv(div);
+    console.log("Active div: " + active);
   }
 
   // Take the current div and hide it
@@ -30,11 +31,20 @@ const Buttons = {
   function showDiv(div) {
     active = div;
     document.getElementById(active).style.display = "block";
-  }
+  };
+
 
 const homenav = document.getElementById("homenav");
 const singlenav = document.getElementById("singlenav");
+const multinav = document.getElementById("multinav");
+const guessnav = document.getElementById("guessnav");
 
+homenav.addEventListener("click", () => navButton(Buttons.Home));
+homenav.addEventListener("click", () => console.log("HOME BUTTON CLICKED!"));
 
-homenav.addEventListener("click", navButton(Buttons.Home));
-singlenav.addEventListener("click", navButton(Buttons.Single));
+singlenav.addEventListener("click", () => navButton(Buttons.Single));
+singlenav.addEventListener("click", () => console.log("NAV BUTTON CLICKED!"));
+
+multinav.addEventListener("click", () => navButton(Buttons.Multi));
+
+guessnav.addEventListener("click", () => navButton(Buttons.Guess));
