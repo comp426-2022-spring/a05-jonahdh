@@ -6,3 +6,35 @@
 // Enter number and press button to activate coin flip series
 
 // Guess a flip by clicking either heads or tails button
+
+const Buttons = {
+    Home: "home",
+    Single: "single",
+    Multi: "multi",
+    Guess: "guess"
+  };
+
+  var active = Buttons.Home;
+
+  // When a button is clicked, hide the current div and show the clicked div
+  function navButton(div) {
+    clearCurrentDiv();
+    showDiv(div);
+  }
+
+  // Take the current div and hide it
+  function clearCurrentDiv() {
+    document.getElementById(active).style.display = "none";
+  }
+
+  function showDiv(div) {
+    active = div;
+    document.getElementById(active).style.display = "block";
+  }
+
+const homenav = document.getElementById("homenav");
+const singlenav = document.getElementById("singlenav");
+
+
+homenav.addEventListener("click", navButton(Buttons.Home));
+singlenav.addEventListener("click", navButton(Buttons.Single));
