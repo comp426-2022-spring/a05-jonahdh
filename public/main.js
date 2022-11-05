@@ -15,6 +15,7 @@ const Buttons = {
   };
 
   var active = Buttons.Home;
+  document.getElementById(active).style.display = "block";
 
   // When a button is clicked, hide the current div and show the clicked div
   function navButton(div) {
