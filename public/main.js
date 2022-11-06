@@ -50,8 +50,23 @@ guessnav.addEventListener("click", () => navButton(Buttons.Guess));
 // Start for single flip calls:
 
 const singleflipButton = document.getElementById("singleflip");
+const coinpic = document.getElementById("coinpic");
+const value = document.getElementById("value");
+
 singleflipButton.addEventListener("click", flipcoin);
 function flipcoin() {
-  fetch('http://localhost:3000/app/flip/', {mode: 'cors'}).then(response => {return response.json()}).then(result => console.log(result));
+  fetch('http://localhost:3000/app/flip/', {mode: 'cors'})
+  .then(response => {return response.json()})
+  .then(result => {
+    if (result.flip === 'heads') {
+      coinpic.src = 'assets/img/heads.png';
+      value.textContent = "Heads!"
+    }
+    else {
+      coinpic.src = 'assets/img/tails.png';
+      value.textContent = "Tails!"
+    }
+  });
+  
   //.then(result => console.log(result))
 }
