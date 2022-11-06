@@ -89,9 +89,9 @@ app.post('/app/flip/coins', (req, res) => {
     res.status(200).json({"raw":flips,"summary":count})
 });
 
-app.get('/app/flip/call/:call(heads|tails)/', (req, res) => {
+app.post('/app/flip/call/', (req, res) => {
         res.statusCode = 200;
-        res.json(flipACoin(req.params.call))
+        res.json(flipACoin(req.body.call))
 });
 
 if (args.debug) {

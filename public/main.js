@@ -88,7 +88,7 @@ const coins = document.getElementById("coins")
 					const formData = new FormData(formEvent);
 					const flips = await sendFlips({ url, formData });
 
-					console.log(flips);
+					// console.log(flips);
 					document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads;
 					document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails;
 				} catch (error) {
@@ -99,7 +99,7 @@ const coins = document.getElementById("coins")
 			async function sendFlips({ url, formData }) {
 				const plainFormData = Object.fromEntries(formData.entries());
 				const formDataJson = JSON.stringify(plainFormData);
-				console.log(formDataJson);
+				// console.log(formDataJson);
 
 				const options = {
 					method: "POST",
@@ -110,6 +110,8 @@ const coins = document.getElementById("coins")
 					body: formDataJson
 				};
 
+				console.log(options);
+
 				const response = await fetch(url, options);
 				return response.json()
 			}
@@ -118,26 +120,32 @@ const coins = document.getElementById("coins")
 const guessheads = document.getElementById('guessheads');
 const guesstails = document.getElementById('guesstails');
 
-guessheads.addEventListener("click", guessFlips);
-guesstails.addEventListener("click", () => console.log("tials"));
+guessheads.addEventListener("click", () => guessCall('heads'));
+guesstails.addEventListener("click", () => guessCall('tails'));
 
-async function guessFlips(event, face) {
-	console.log(event);
-	console.log(face);
-	event.preventDefault();
-				
-	const endpoint = "app/flip/call/";
-	const url = document.baseURI+endpoint;
-
-	const formEvent = event.currentTarget;
+async function guessCall(face) {
+	const endpoint = "app/flip/call/"
+	const url = document.baseURI+endpoint
 	try {
-		// const formData = new FormData(formEvent);
-		// const flips = await sendFlips({ url, formData });
-
-		//console.log(flips);
-		//document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads;
-		//document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails;
-	} catch (error) {
+		const result = await sendGuess({url, face})
+		const status = document.getElementById("status");
+		status.innerHTML = result.result.toUpperCase() + "!";
+	}
+	catch (error) {
 		console.log(error);
 	}
+}
+
+async function sendGuess({url, face}) {
+	const options = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json"
+		},
+		body: `{\"call\":\"${face}\"}`
+	};
+
+	const response = await fetch(url, options);
+	return response.json();
 }
