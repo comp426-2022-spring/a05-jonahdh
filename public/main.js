@@ -46,3 +46,15 @@ singlenav.addEventListener("click", () => navButton(Buttons.Single));
 multinav.addEventListener("click", () => navButton(Buttons.Multi));
 
 guessnav.addEventListener("click", () => navButton(Buttons.Guess));
+
+// Start for single flip calls:
+
+const singleflipButton = document.getElementById("singleflip");
+singleflipButton.addEventListener("click", flipcoin);
+function flipcoin() {
+  fetch('127.0.0.1:3000/app/flip/', {mode: 'cors'})
+  .then(response => {return response.json()})
+  .then(result => console.log(result))
+  .catch(console.log("404 request not fulfilled"));
+  //.then(result => console.log(result))
+}

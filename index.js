@@ -41,6 +41,9 @@ const server = app.listen(HTTP_PORT, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',HTTP_PORT))
 });
 
+// Middleware for parsing json
+app.use(express.json());
+
 if (!(args.log == "false")) {
     const WRITESTREAM = fs.createWriteStream('access.log', { flags: 'a' });
     app.use(morgan('combined', { stream: WRITESTREAM }));
