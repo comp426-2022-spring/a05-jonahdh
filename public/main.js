@@ -14,7 +14,7 @@ const Buttons = {
     Guess: "guess"
   };
 
-  var active = Buttons.Multi;
+  var active = Buttons.Guess;
   document.getElementById(active).style.display = "block";
 
   // When a button is clicked, hide the current div and show the clicked div
@@ -113,3 +113,31 @@ const coins = document.getElementById("coins")
 				const response = await fetch(url, options);
 				return response.json()
 			}
+
+// Scripting for guessing game
+const guessheads = document.getElementById('guessheads');
+const guesstails = document.getElementById('guesstails');
+
+guessheads.addEventListener("click", guessFlips);
+guesstails.addEventListener("click", () => console.log("tials"));
+
+async function guessFlips(event, face) {
+	console.log(event);
+	console.log(face);
+	event.preventDefault();
+				
+	const endpoint = "app/flip/call/";
+	const url = document.baseURI+endpoint;
+
+	const formEvent = event.currentTarget;
+	try {
+		// const formData = new FormData(formEvent);
+		// const flips = await sendFlips({ url, formData });
+
+		//console.log(flips);
+		//document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads;
+		//document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails;
+	} catch (error) {
+		console.log(error);
+	}
+}
