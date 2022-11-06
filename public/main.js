@@ -52,9 +52,6 @@ guessnav.addEventListener("click", () => navButton(Buttons.Guess));
 const singleflipButton = document.getElementById("singleflip");
 singleflipButton.addEventListener("click", flipcoin);
 function flipcoin() {
-  fetch('127.0.0.1:3000/app/flip/', {mode: 'cors'})
-  .then(response => {return response.json()})
-  .then(result => console.log(result))
-  .catch(console.log("404 request not fulfilled"));
+  fetch('http://localhost:3000/app/flip/', {mode: 'cors'}).then(response => {return response.json()}).then(result => console.log(result));
   //.then(result => console.log(result))
 }

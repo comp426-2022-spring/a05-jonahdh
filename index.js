@@ -44,6 +44,8 @@ const server = app.listen(HTTP_PORT, () => {
 // Middleware for parsing json
 app.use(express.json());
 
+app.use(express.static('./public'));
+
 if (!(args.log == "false")) {
     const WRITESTREAM = fs.createWriteStream('access.log', { flags: 'a' });
     app.use(morgan('combined', { stream: WRITESTREAM }));
