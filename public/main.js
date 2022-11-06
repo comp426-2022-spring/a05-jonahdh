@@ -14,7 +14,7 @@ const Buttons = {
     Guess: "guess"
   };
 
-  var active = Buttons.Single;
+  var active = Buttons.Multi;
   document.getElementById(active).style.display = "block";
 
   // When a button is clicked, hide the current div and show the clicked div
@@ -70,3 +70,46 @@ function flipcoin() {
   
   //.then(result => console.log(result))
 }
+
+// Scripting for multiguess - taken from w11
+const coins = document.getElementById("coins")
+			// Add event listener for coins form
+			coins.addEventListener("submit", flipCoins)
+			// Create the submit handler
+			async function flipCoins(event) {
+				event.preventDefault();
+				
+				const endpoint = "app/flip/coins/"
+				const url = document.baseURI+endpoint
+
+				const formEvent = event.currentTarget
+
+				try {
+					const formData = new FormData(formEvent);
+					const flips = await sendFlips({ url, formData });
+
+					console.log(flips);
+					document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads;
+					document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails;
+				} catch (error) {
+					console.log(error);
+				}
+			}
+			// Create a data sender
+			async function sendFlips({ url, formData }) {
+				const plainFormData = Object.fromEntries(formData.entries());
+				const formDataJson = JSON.stringify(plainFormData);
+				console.log(formDataJson);
+
+				const options = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/json"
+					},
+					body: formDataJson
+				};
+
+				const response = await fetch(url, options);
+				return response.json()
+			}
