@@ -14,7 +14,7 @@ const Buttons = {
     Guess: "guess"
   };
 
-  var active = Buttons.Guess;
+  var active = Buttons.Home;
   document.getElementById(active).style.display = "block";
 
   // When a button is clicked, hide the current div and show the clicked div
